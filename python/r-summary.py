@@ -23,6 +23,7 @@ summary = df.describe(datetime_is_numeric = True, include = 'all')
 summary
 
 # Much more robust solution, perhaps a bit excessive for some applications
+# It takes quite a long time on larger data sets
 
 profile = ProfileReport(df, title = 'Data Profile')
 
