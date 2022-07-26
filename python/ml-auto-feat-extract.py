@@ -30,3 +30,14 @@ for file in files:
     pickle.dump(features, open(out_path, 'wb'))
     
     print('File:', file, 'feature extraction is complete after', (time.time()-start_time)/60,'minutes')
+    
+    
+# Read the features back in and as a single data frame
+
+files = os.listdir(out)
+features_all = {}
+
+for file in files:
+    features_all[file.split('.')[0]] = pd.read_pickle(os.path.join(loc,file))
+    
+features_all = pd.concat(features_all)
