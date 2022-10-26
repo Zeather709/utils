@@ -3,15 +3,15 @@
 import pandas as pd
 
 dataset = pd.read_csv('Data.csv')
-X = dataset.iloc[:, :-1].values        # select all rows and all columns except the last column   
+x = dataset.iloc[:, :-1].values        # select all rows and all columns except the last column
 y = dataset.iloc[:, -1].values         # select all rows and only the last column
 
 # Impute missing values 
 
 from sklearn.impute import SimpleImputer 
 imputer = SimpleImputer(missing_values = np.nan, strategy = 'mean')
-imputer.fit(X[:, 1:3])                                                  # Include all numerical columns
-X[:, 1:3] = imputer.transform(X[:, 1:3])
+imputer.fit(x[:, 1:3])                                                  # Include all numerical columns
+x[:, 1:3] = imputer.transform(x[:, 1:3])
 
 # Encoding categorical data
 
@@ -20,8 +20,8 @@ X[:, 1:3] = imputer.transform(X[:, 1:3])
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 ct = ColumnTransformer(transformers = [('encoder', OneHotEncoder(), [0])], remainder = 'passthrough')
-X = ct.fit_transform(X)
-print(X)
+x = ct.fit_transform(x)
+print(x)
 
 # Encoding the dependant variable
 
@@ -34,12 +34,13 @@ print(y)
 
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)    # 80/20 train/test split 
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 0)    # 80/20 train/test split
 
 # Feature Scaling
 
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 
-X_train[:,3:] = sc.fit_transform(X_train[:,3:])
-X_test[:,3:] = sc.fit_transform(X_test[:,3:])
+x_train[:,3:] = sc.fit_transform(x_train[:,3:])
+x_test[:,3:] = sc.fit_transform(x_test[:,3:])
+# Remove indices for NNs/deep learning - essential to scale all features in Neural Nets
