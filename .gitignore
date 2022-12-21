@@ -1,4 +1,4 @@
-
+.gitignore
 python/neural-nets/ml-100k/u5.test
 python/neural-nets/ml-100k/u5.base
 python/neural-nets/ml-100k/u4.test
